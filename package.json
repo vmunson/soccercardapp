@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vmunson/counterappback.git"
+    "url": "git+https://github.com/vmunson/soccercardappback.git"
   },
   "author": "Ginny Munson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vmunson/counterappback/issues"
+    "url": "https://github.com/vmunson/soccercardappback/issues"
   },
-  "homepage": "https://github.com/vmunson/counterappback#readme",
+  "homepage": "https://github.com/vmunson/soccercardappback#readme",
   "dependencies": {
     "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
