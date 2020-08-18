@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -9,7 +10,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use('/api/user', require("./routes/user"))
 
-mongoose.connect('mongodb+srv://gmunson:dOVZZKwElBGG7ndd@cluster0-t0tne.mongodb.net/soccer?retryWrites=true&w=majority');
+mongoose.connect(process.env.database_url);
 const connection = mongoose.connection;
 
 connection.once('open', function() {
