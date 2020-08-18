@@ -10,7 +10,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use('/api/user', require("./routes/user"))
 
-mongoose.connect(process.env.database_url);
+mongoose.connect();
 const connection = mongoose.connection;
 
 connection.once('open', function() {
