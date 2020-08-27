@@ -1,23 +1,32 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/Users');
+var jwt = require("jsonwebtoken")
+const config = require("../config/auth.js");
 
 router.post("/signup", (req, res)=>{
   const user=new User({
-    email: req.body.data.email,
-    password: req.body.data.password,
-    name: req.body.data.name
+    email: req.body.user.email,
+    password: req.body.user.password,
+    name: req.body.user.name
   }).save((err, response)=>{
     if(err){
       res.status(400).send(err)
     }
-    res.send({user:response._id, name:response.name})
+    else{
+      var token = jwt.sign({ id: response._id }, config.secret, {
+        expiresIn: 86400 // 24 hours
+      });
+  
+      res.send({user:response._id, name:response.name, accessToken:token})
+    }
+    
   })
 })
 
 router.post("/signin", (req, res)=>{
-  let email = req.body.data.email
-  let password = req.body.data.password
+  let email = req.body.user.email
+  let password = req.body.user.password
   let message = 'Have fun counting!'
   User.findOne({'email':email}, (err, user)=>{
     if(!user){
@@ -31,7 +40,11 @@ router.post("/signin", (req, res)=>{
         return res.status(400).json({message: 'Email or password is incorrect'})
       }
 
-      res.send({user:user._id, name:user.name})
+      var token = jwt.sign({ id: user._id }, config.secret, {
+        expiresIn: 86400 // 24 hours
+      });
+
+      res.send({user:user._id, name:user.name, accessToken:token})
     })
   })
 })

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const CardSchema = mongoose.Schema({
+const CardsSchema = mongoose.Schema({
   player: {
     type: String,
     trim: true
@@ -16,7 +16,7 @@ const CardSchema = mongoose.Schema({
     type: String,
     trim: true
   },
-  userId: ObjectId
+  userId: mongoose.Schema.Types.ObjectId
 })
 
-module.exports = mongoose.model('Card', CardSchema)
+module.exports = mongoose.model('Cards', CardsSchema)

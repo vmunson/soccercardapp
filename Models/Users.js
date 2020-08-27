@@ -1,10 +1,12 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const uniqueValidator = require('mongoose-unique-validator');
 
 const UserSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
     trim: true
   },
   password: {
@@ -37,6 +39,8 @@ UserSchema.pre('save', function(next){
     next()
   }
 })
+
+UserSchema.plugin(uniqueValidator);
 
 UserSchema.methods.comparePassword = function(candidatePassword, checkPassword){
   bcrypt.compare(candidatePassword, this.password, function(err, isMatch){
