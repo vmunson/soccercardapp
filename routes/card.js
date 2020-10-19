@@ -3,6 +3,7 @@ var router = express.Router();
 var Card = require('../models/Cards');
 
 router.post("/saveCard", (req, res) => {
+  console.log(`hello`);
   const card = new Card({
     player: req.body.data.player,
     cardType: req.body.data.cardType,
@@ -11,11 +12,13 @@ router.post("/saveCard", (req, res) => {
     grade: req.body.data.grade,
     comments: req.body.data.comments,
     userId: req.body.data.userId
-  }).save((err, res) => {
+  }).save((err, data) => {
     if(err){
       res.status(400).send(err)
     }
-    res.send({id:res._id, name:res.player})
+    else {
+      res.send({id:data._id, name:data.player})
+    }
   })
 })
 

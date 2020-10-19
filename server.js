@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(require('./middleware/headers'));
 app.use(require('./middleware/authJwt'));
 app.use('/api/user', require("./routes/user"))
-app.use('api/card', require('./routes/card'))
+app.use('/api/card', require('./routes/card'))
 
 mongoose.connect(process.env.database_url);
 const connection = mongoose.connection;

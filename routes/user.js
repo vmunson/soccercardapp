@@ -27,7 +27,6 @@ router.post("/signup", (req, res)=>{
 router.post("/signin", (req, res)=>{
   let email = req.body.user.email
   let password = req.body.user.password
-  let message = 'Have fun counting!'
   User.findOne({'email':email}, (err, user)=>{
     if(!user){
       res.json({message: 'Email or password is incorrect'})
