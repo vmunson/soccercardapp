@@ -3,8 +3,7 @@ var router = express.Router();
 var Card = require('../models/Cards');
 
 router.post("/saveCard", (req, res) => {
-  console.log(`hello`);
-  const card = new Card({
+    const card = new Card({
     player: req.body.data.player,
     cardType: req.body.data.cardType,
     numbered: req.body.data.numbered,
@@ -18,6 +17,31 @@ router.post("/saveCard", (req, res) => {
     }
     else {
       res.send({id:data._id, name:data.player})
+    }
+  })
+})
+
+router.put("/updateCard", (req, res) => {
+  let id = {_id : req.body.playerId}
+  let update = req.body.data
+
+  Card.findOneAndUpdate(id, update, {new : true}, (err, data) => {
+    if(err){
+      res.status(400).send(err)
+    }
+    else {
+      res.send(data)
+    }
+  })
+})
+
+router.delete("/deleteCard/:id", (req, res) => {
+  Card.findOneAndDelete(req.params.id, (err, data) => {
+    if(err){
+      res.status(400).send(err)
+    }
+    else {
+      res.send(data)
     }
   })
 })

@@ -13,7 +13,7 @@ app.use(require('./middleware/authJwt'));
 app.use('/api/user', require("./routes/user"))
 app.use('/api/card', require('./routes/card'))
 
-mongoose.connect(process.env.database_url);
+mongoose.connect(process.env.database_url, { useFindAndModify: false });
 const connection = mongoose.connection;
 
 connection.once('open', function() {
