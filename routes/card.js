@@ -21,6 +21,18 @@ router.post("/saveCard", (req, res) => {
   })
 })
 
+router.get("/allCards", (req, res) => {
+  Card.find(req.body, (err, data) => {
+    if(err){
+      res.status(400).send(err)
+    }
+    else {
+      res.send({data})
+    }
+  })
+});
+
+
 router.put("/updateCard", (req, res) => {
   let id = {_id : req.body.playerId}
   let update = req.body.data
