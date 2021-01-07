@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose') 
 
 const CardsSchema = mongoose.Schema({
   player: {
